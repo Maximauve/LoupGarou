@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 29 mars 2022 à 09:47
+-- Généré le : mar. 29 mars 2022 à 09:53
 -- Version du serveur : 8.0.27
 -- Version de PHP : 7.4.26
 
@@ -30,10 +30,10 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `item`;
 CREATE TABLE IF NOT EXISTS `item` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) NOT NULL,
+  `name` varchar(64) COLLATE utf8mb4_latvian_ci NOT NULL,
   `price` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
 -- --------------------------------------------------------
 
@@ -44,17 +44,17 @@ CREATE TABLE IF NOT EXISTS `item` (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(32) NOT NULL,
-  `email` varchar(320) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `profile_pic` varchar(128) DEFAULT NULL,
+  `username` varchar(32) COLLATE utf8mb4_latvian_ci NOT NULL,
+  `email` varchar(320) COLLATE utf8mb4_latvian_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_latvian_ci NOT NULL,
+  `profile_pic` varchar(128) COLLATE utf8mb4_latvian_ci DEFAULT NULL,
   `level` int NOT NULL DEFAULT '0',
   `xp` int NOT NULL DEFAULT '0',
   `coins` int NOT NULL DEFAULT '0',
   `nb_win` int NOT NULL DEFAULT '0',
   `nb_loose` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
 -- --------------------------------------------------------
 
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `user_inventory` (
   PRIMARY KEY (`id`),
   KEY `foreign_user` (`user_id`),
   KEY `foreign_item` (`item_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_latvian_ci;
 
 --
 -- Contraintes pour les tables déchargées
