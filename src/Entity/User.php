@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * User
@@ -11,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Table(name="user")
  * @ORM\Entity
  */
-class User extends UserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @var int
@@ -87,116 +88,116 @@ class User extends UserInterface
 
     public function getId(): ?int
     {
-        return $this->id;
+      return $this->id;
     }
 
     public function getUsername(): ?string
     {
-        return $this->username;
+      return $this->username;
     }
 
     public function setUsername(string $username): self
     {
-        $this->username = $username;
-
-        return $this;
+      $this->username = $username;
+      return $this;
     }
 
     public function getEmail(): ?string
     {
-        return $this->email;
+      return $this->email;
     }
 
     public function setEmail(string $email): self
     {
-        $this->email = $email;
-
-        return $this;
+      $this->email = $email;
+      return $this;
     }
 
     public function getPassword(): ?string
     {
-        return $this->password;
+      return $this->password;
     }
 
     public function setPassword(string $password): self
     {
-        $this->password = $password;
-
-        return $this;
+      $this->password = $password;
+      return $this;
     }
 
     public function getProfilePic(): ?string
     {
-        return $this->profilePic;
+      return $this->profilePic;
     }
 
     public function setProfilePic(?string $profilePic): self
     {
-        $this->profilePic = $profilePic;
-
-        return $this;
+      $this->profilePic = $profilePic;
+      return $this;
     }
 
     public function getLevel(): ?int
     {
-        return $this->level;
+      return $this->level;
     }
 
     public function setLevel(int $level): self
     {
-        $this->level = $level;
-
-        return $this;
+      $this->level = $level;
+      return $this;
     }
 
     public function getXp(): ?int
     {
-        return $this->xp;
+      return $this->xp;
     }
 
     public function setXp(int $xp): self
     {
-        $this->xp = $xp;
-
-        return $this;
+      $this->xp = $xp;
+      return $this;
     }
 
     public function getCoins(): ?int
     {
-        return $this->coins;
+      return $this->coins;
     }
 
     public function setCoins(int $coins): self
     {
-        $this->coins = $coins;
-
-        return $this;
+      $this->coins = $coins;
+      return $this;
     }
 
     public function getNbWin(): ?int
     {
-        return $this->nbWin;
+      return $this->nbWin;
     }
 
     public function setNbWin(int $nbWin): self
     {
-        $this->nbWin = $nbWin;
-
-        return $this;
+      $this->nbWin = $nbWin;
+      return $this;
     }
 
     public function getNbLoose(): ?int
     {
-        return $this->nbLoose;
+      return $this->nbLoose;
     }
 
     public function setNbLoose(int $nbLoose): self
     {
-        $this->nbLoose = $nbLoose;
-
-        return $this;
+      $this->nbLoose = $nbLoose;
+      return $this;
     }
+		public function getRoles() : array 
+		{
+			return [];
+		}
+		
+		public function eraseCredentials(){}
 
-
+		public function getUserIdentifier() : string
+		{
+			return $this->getEmail();
+		}
 }
