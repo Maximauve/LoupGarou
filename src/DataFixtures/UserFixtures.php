@@ -15,6 +15,11 @@ class UserFixtures extends Fixture
 				$user->setEmail('max.mourgues@gmail.com');
 				$user->setPassword(password_hash('Coucou', PASSWORD_BCRYPT));
         $manager->persist($user);
+        $user = new User();
+				$user->setUsername('Mattox');
+				$user->setEmail('mattox@exemple.com');
+				$user->setPassword(password_hash('mattox', PASSWORD_BCRYPT));
+        $manager->persist($user);
 
         $manager->flush();
     }
