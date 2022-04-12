@@ -88,6 +88,4 @@ class UserInventory
 
         return $this;
     }
-
-
 }
