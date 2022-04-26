@@ -8,6 +8,7 @@
 /var/
 /vendor/
 symfony.lock
+.env
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
@@ -29,3 +30,5 @@ composer.lock
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+.vscode/
