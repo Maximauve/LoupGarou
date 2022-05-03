@@ -7,7 +7,6 @@
 /public/bundles/
 /var/
 /vendor/
-symfony.lock
 .env
 ###< symfony/framework-bundle ###
 
@@ -22,8 +21,6 @@ symfony.lock
 ###< phpunit/phpunit ###
 
 node_modules/
-package-lock.json
-composer.lock
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
 /public/build/

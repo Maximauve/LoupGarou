@@ -3,5 +3,23 @@
 @tailwind utilities;
 
 body {
-  background-color: lightgray;
+  scrollbar-gutter: unset;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-dark-black;
+  @apply rounded-full;
+}
+::-webkit-scrollbar-corner {
+  @apply rounded-full;
+  @apply bg-dark-black;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-track-piece {
+  background: transparent;
 }

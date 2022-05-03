@@ -1,19 +1,33 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<html class="scroll-smooth max-w-full overflow-x-hidden">
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+	<head>
+		<meta charset="UTF-8" name="viewport">
+		<title>
+			{% block title %}{% endblock %}
+		</title>
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+		<script src="https://kit.fontawesome.com/32777f7833.js" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<nav class="flex h-24 w-screen justify-center items-center bg-dark-black">
+			<h1 class="text-5xl text-light-blue font-semibold">Wolfed</h1>
+			{# div that display a rounded user, redirect on /login #}
+			<a href="/connexion" class="right-0 absolute flex flex-col items-center justify-center h-12 w-12 rounded-full bg-light-blue z-20">
+				<i class="fa-regular fa-user fa-lg"></i>
+			</a>
+		</nav>
+		<div class="h-screen w-screen bg-dark-blue">
+			{% block body %}
+				{# . #}
+			{% endblock %}
+		</div>
+		<footer class="flex h-20 w-screen bg-dark-black"></footer>
+	</body>
 </html>
