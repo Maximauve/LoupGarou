@@ -45,9 +45,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string|null
      *
-     * @ORM\Column(name="profile_pic", type="string", length=128, nullable=true)
+     * @ORM\Column(name="profile_pic", type="string", length=128, nullable=false)
      */
-    private $profilePic;
+    private $profilePic = "default.png";
     /**
      * @var int
      *

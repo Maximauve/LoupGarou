@@ -8,11 +8,17 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
-    #[Route('/profil', name: 'app_user')]
-    public function index(): Response
-    {
-        return $this->render('user/index.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
-    }
+  #[Route('/profil', name: 'app_user')]
+  public function index(): Response
+  {
+		if (!$this->getUser()) {
+			$this->addFlash(
+				'error',
+				'Vous devez être connecté pour accéder à cette page.'
+			);
+			return $this->redirectToRoute('app_login');
+		}
+    return $this->render('user/index.html.twig', [
+    ]);
+  }
 }

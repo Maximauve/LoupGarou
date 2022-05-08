@@ -18,16 +18,17 @@
 	<body>
 		<nav class="flex h-24 w-screen justify-center items-center bg-dark-black">
 			<h1 class="text-5xl text-light-blue font-semibold">Wolfed</h1>
-			{# div that display a rounded user, redirect on /login #}
+			{% if app.user %}
+				<a href="/profil" class="right-0 absolute flex flex-col items-center justify-center h-12 w-12 rounded-full bg-none z-20">
+					<img src="/assets/images/users/{{ app.user.ProfilePic }}" class="rounded-full h-20 w-20"></img>
+			</a>
+		{% else %}
 			<a href="/connexion" class="right-0 absolute flex flex-col items-center justify-center h-12 w-12 rounded-full bg-light-blue z-20">
 				<i class="fa-regular fa-user fa-lg"></i>
 			</a>
-		</nav>
-		<div class="h-screen w-screen bg-dark-blue">
-			{% block body %}
-				{# . #}
-			{% endblock %}
-		</div>
-		<footer class="flex h-20 w-screen bg-dark-black"></footer>
+		{% endif %}
 	</body>
-</html>
+</html></nav><div class="h-screen w-screen bg-dark-blue">
+{% block body %}
+	{# . #}
+{% endblock %}</div><footer class="flex h-20 w-screen bg-dark-black"></footer></body></html>
