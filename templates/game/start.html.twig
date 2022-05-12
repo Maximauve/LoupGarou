@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello GameController!{% endblock %}
+
+{% block body %}
+<form method="POST">
+    {{ message }}
+    <div>
+      <input type="checkbox" id="witch" name="witch"
+             checked>
+      <label for="witch">Sorcière</label>
+    </div>
+    <div>
+      <input type="checkbox" id="seer" name="seer"
+             checked>
+      <label for="seer">Voyante</label>
+    </div>
+    <div>
+      <input type="checkbox" id="hunter" name="hunter"
+             checked>
+      <label for="hunter">Chasseur</label>
+    </div>
+    <div>
+      <label for="villager">Nombre de Villageois</label>
+      <select name="villager" id="villager">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+      </select>
+    </div>
+    <div>
+      <label for="werewolf">Nombre de Loups Garous</label>
+      <select name="werewolf" id="werewolf">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+      </select>
+    </div>
+    <button type="submit"> Envoyer ! </button>
+</form>
+{% endblock %}
