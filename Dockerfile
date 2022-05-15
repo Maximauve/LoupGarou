@@ -12,7 +12,7 @@ RUN docker-php-ext-install pdo_mysql
 
 # Install composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
-	php composer-setup.php && php -r "unlink('composer-setup.php');" && \
+	php composer-setup.php --version=2.3.5 && php -r "unlink('composer-setup.php');" && \
 	mv composer.phar /usr/local/bin/composer
 
 # Install Symfony-CLI
