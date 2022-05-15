@@ -13,7 +13,7 @@ module.exports = {
 			},
 			'blood': "#FF4E4B",
 			'error': '#FF0000',
-			'success': '#00FF00',
+			'success': '#00FF00'
 		},
 	},
 	plugins: [],

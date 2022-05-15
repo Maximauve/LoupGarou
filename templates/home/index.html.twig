@@ -1,8 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Wolfed
+{% block title %}
+	Wolfed
 {% endblock %}
 
 {% block body %}
 	<h1>{{message}}</h1>
+	<form action="{{ path('app_ping') }}" method="POST">
+		<button class="rounded bg-blood">Ping !</button>
+	</form>
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+		const eventSource = new EventSource("{{ mercure('http://monsite.com/ping')|escape('js') }}");
+eventSource.onmessage = function (event) {
+console.log(JSON.parse(event.data));
+};
+	</script>
 {% endblock %}
