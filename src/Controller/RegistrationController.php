@@ -13,11 +13,15 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\HttpFoundation\File\File;
+
 
 class RegistrationController extends AbstractController
 {
   #[Route('/register', name: 'app_register')]
-  public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, Authenticator $authenticator, EntityManagerInterface $entityManager): Response
+  public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, Authenticator $authenticator, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
   {
     $user = new User();
     $form = $this->createForm(RegistrationFormType::class, $user);
@@ -31,6 +35,26 @@ class RegistrationController extends AbstractController
           $form->get('plainPassword')->getData()
         )
       );
+
+      $profilePic = $form->get('profilePic')->getData();
+      if ($profilePic) {
+        $originalFilename = pathinfo($profilePic->getClientOriginalName(), PATHINFO_FILENAME);
+        // this is needed to safely include the file name as part of the URL
+        $safeFilename = $slugger->slug($originalFilename);
+        $newFilename = $safeFilename.'-'.uniqid().'.'.$profilePic->guessExtension();
+
+        // Move the file to the directory where brochures are stored
+        try {
+            $profilePic->move(
+                $this->getParameter('profile_pic_directory'),
+                $newFilename
+            );
+        } catch (FileException $e) {}
+        // updates the 'profilePicname' property to store the PDF file name
+        // instead of its contents
+        $user->setProfilePicName($newFilename);
+      }
+
 
       $entityManager->persist($user);
       $entityManager->flush();

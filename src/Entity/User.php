@@ -2,10 +2,14 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
  * User
@@ -27,13 +31,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="username", type="string", length=32, nullable=false)
+     * @ORM\Column(name="username", type="string", length=32, nullable=false, unique=true)
      */
     private $username;
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=320, nullable=false)
+     * @ORM\Column(name="email", type="string", length=320, nullable=false, unique=true)
      */
     private $email;
     /**
@@ -46,6 +50,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string|null
      *
      * @ORM\Column(name="profile_pic", type="string", length=128, nullable=false)
+     * @Ignore()
      */
     private $profilePic = "default.png";
     /**
@@ -83,6 +88,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Friends::class, mappedBy="userOne")
+     */
+    private $friends;
+
+    public function __construct()
+    {
+        $this->friends = new ArrayCollection();
+    }
+    
     public function getId(): ?int
     {
       return $this->id;
@@ -114,10 +130,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
       $this->password = $password;
       return $this;
     }
+
     public function getProfilePic(): ?string
     {
       return $this->profilePic;
     }
+
     public function setProfilePic(?string $profilePic): self
     {
       $this->profilePic = $profilePic;
@@ -186,6 +204,59 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function setProfilePicName($profilePic)
+    {
+        $this->profilePic = $profilePic;
+
+        return $this;
+    }
+
+    public function getProfilePicName()
+    {
+        return $this->profilePic;
+    }
+
+    public function serialize()
+    {
+        $this->profileImage = base64_encode($this->profileImage);
+    }
+
+    public function unserialize($serialized)
+    {
+        $this->profileImage = base64_decode($this->profileImage);
+
+    }
+
+    /**
+     * @return Collection<int, Friends>
+     */
+    public function getFriends(): Collection
+    {
+        return $this->friends;
+    }
+
+    public function addFriend(Friends $friend): self
+    {
+        if (!$this->friends->contains($friend)) {
+            $this->friends[] = $friend;
+            $friend->setUserOne($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFriend(Friends $friend): self
+    {
+        if ($this->friends->removeElement($friend)) {
+            // set the owning side to null (unless already changed)
+            if ($friend->getUserOne() === $this) {
+                $friend->setUserOne(null);
+            }
+        }
 
         return $this;
     }

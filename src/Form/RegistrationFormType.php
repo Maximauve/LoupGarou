@@ -11,6 +11,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 
 class RegistrationFormType extends AbstractType
 {
@@ -52,6 +55,22 @@ class RegistrationFormType extends AbstractType
 					]),
 				],
 			])
+      ->add('profilePic', FileType::class, [
+        'label' => 'Photo de profil',
+        'required' => false,
+        'data_class' => null,
+        'constraints' => [
+            new File([
+                'maxSize' => '1024k',
+                'mimeTypes' => [
+                    'image/png',
+                    'image/jpeg',
+                    'image/gif'
+                ],
+                'mimeTypesMessage' => 'Please upload a valid image',
+            ])
+        ],
+    ])
       ;
     }
 
