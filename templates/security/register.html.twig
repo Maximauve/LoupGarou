@@ -8,13 +8,18 @@
 
 	{{ form_start(registrationForm) }}
 	{{ form_row(registrationForm.username, {label: "Nom d'utilisateur : "})}}
-	{{ form_row(registrationForm.email, {label: 'Adresse Mail : ', id: 'email'}) }}
-	{{ form_row(registrationForm.plainPassword, {label: 'Mot de passe : ', id: 'password'})}}
-	{{ form_row(registrationForm.confirm_password, {label: 'Confirmez le mot de passe : ', id: 'confirm_password'}) }}
+	{{ form_row(registrationForm.email, {label: 'Adresse Mail : ', id: 'email', 'attr': {'oninput': 'validateEmail(this)'}}) }}
+	{{ form_row(registrationForm.plainPassword, {label: 'Mot de passe : ', id: 'password', 'attr': {'oninput': 'validatePassword()'}})}}
+	{{ form_row(registrationForm.confirm_password, {label: 'Confirmez le mot de passe : ', id: 'confirm_password', 'attr': {'oninput': 'validatePassword()'}}) }}
 	{{ form_row(registrationForm.profilePic) }}
-	<span id="error"></span>
+	<span class="text-error" id="error"></span>
 
-	<button type="submit" id="button" class="rounded bg-light-blue disabled:bg-dark-gray">Register</button>
-	
+	<button type="submit" id="button" class="rounded bg-light-blue disabled:bg-dark-gray" disabled>Register</button>
+
 	{{ form_end(registrationForm) }}
+{% endblock %}
+
+
+{% block javascripts %}
+	<script src="/assets/js/register.js"></script>
 {% endblock %}

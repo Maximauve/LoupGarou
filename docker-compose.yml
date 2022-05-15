@@ -32,6 +32,8 @@ services:
     ports:
       - "80:8000"
     tty: true
+    depends_on:
+      - db
 
   mercure:
     container_name: mercure

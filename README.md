@@ -11,7 +11,9 @@ Par Mattéo FERREIRA et Maxime MOURGUES
 
 ## Installation
 
-- PHP 8.0.12 
+- Docker-compose
+
+Une fois le projet installé, il suffit de faire un `docker-compose up --build` à la racine du projet, puis une fois qu'il s'est bien lancé, rendez vous sur [http://127.0.0.1](http://127.0.0.1)
 
 ## Cahier des charges
 

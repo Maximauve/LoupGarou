@@ -89,10 +89,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $isVerified = false;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Friends::class, mappedBy="userOne")
-     */
-    private $friends;
 
     public function __construct()
     {

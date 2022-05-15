@@ -9,21 +9,20 @@
 		{% block stylesheets %}
 			{{ encore_entry_link_tags('app') }}
 		{% endblock %}
-
-		{% block javascripts %}
-			{{ encore_entry_script_tags('app') }}
-		{% endblock %}
 		<script src="https://kit.fontawesome.com/32777f7833.js" crossorigin="anonymous"></script>
 	</head>
 	<body>
 		<nav class="flex h-24 w-screen justify-center items-center bg-dark-black">
-			<h1 class="text-5xl text-light-blue font-semibold">Wolfed</h1>
+			<a href="/">
+				<h1 class="text-5xl text-light-blue font-semibold">Wolfed</h1>
+			</a>
+
 			{% if app.user %}
-				<a href="/profil" class="right-0 absolute flex flex-col items-center justify-center h-12 w-12 rounded-full bg-none z-20">
+				<a href="/profile" class="right-0 absolute flex flex-col items-center justify-center h-12 w-12 rounded-full bg-none z-20">
 					<img src="/assets/images/users/{{ app.user.ProfilePic }}" class="rounded-full h-20 w-20"/>
 				</a>
 			{% else %}
-				<a href="/connexion" class="right-0 absolute flex flex-col items-center justify-center h-12 w-12 rounded-full bg-light-blue z-20">
+				<a href="/login" class="right-0 absolute flex flex-col items-center justify-center h-12 w-12 rounded-full bg-light-blue z-20">
 					<i class="fa-regular fa-user fa-lg"></i>
 				</a>
 			{% endif %}
@@ -37,4 +36,7 @@
 			<p>Coucou</p>
 		</footer>
 	</body>
+	{% block javascripts %}
+		{{ encore_entry_script_tags('app') }}
+	{% endblock %}
 </html>
